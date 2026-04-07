@@ -10,7 +10,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="font-sans antialiased bg-gray-50 text-gray-900 min-h-screen flex flex-col selection:bg-blue-600 selection:text-white">
+      <body className="font-sans antialiased bg-[#0a0a0f] text-slate-200 min-h-screen flex flex-col selection:bg-cyan-500 selection:text-white">
         <Providers>
           {children}
         </Providers>

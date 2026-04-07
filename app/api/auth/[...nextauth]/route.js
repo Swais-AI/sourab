@@ -4,8 +4,8 @@ import GoogleProvider from 'next-auth/providers/google';
 export const authOptions = {
   providers: [
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID || 'mock-client-id',
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET || 'mock-client-secret',
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       authorization: {
         params: {
           prompt: "consent",
@@ -20,7 +20,6 @@ export const authOptions = {
       if (account.provider === 'google') {
         const isGmail = profile.email?.endsWith('@gmail.com');
         if (!isGmail) {
-          // Reject non-gmail addresses
           return false;
         }
         return true;
@@ -37,7 +36,7 @@ export const authOptions = {
   session: {
     strategy: 'jwt',
   },
-  secret: process.env.NEXTAUTH_SECRET || 'fallback_secret_for_development',
+  secret: process.env.NEXTAUTH_SECRET,
 };
 
 const handler = NextAuth(authOptions);

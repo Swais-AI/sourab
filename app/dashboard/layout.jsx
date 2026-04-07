@@ -45,25 +45,25 @@ export default function DashboardLayout({ children }) {
   }, [user, industry, isModalOpen]);
 
   if (status === 'loading' || !user) {
-    return <div className="min-h-screen flex items-center justify-center text-gray-500 animate-pulse bg-gray-50">Loading Session...</div>;
+    return <div className="min-h-screen flex items-center justify-center text-slate-500 animate-pulse bg-[#0a0a0f]">Loading Session...</div>;
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
-      <nav className="bg-white border-b border-gray-200 sticky top-0 z-40">
+    <div className="min-h-screen bg-[#0a0a0f] flex flex-col">
+      <nav className="bg-[#0a0a0f]/80 backdrop-blur-xl border-b border-white/5 sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16 items-center">
             <div className="flex items-center">
-              <span className="font-bold text-2xl text-blue-600 tracking-tight cursor-pointer" onClick={() => router.push('/')}>SWAIS</span>
-              <span className="ml-4 px-2.5 py-1 text-xs font-semibold bg-blue-50 text-blue-700 rounded-full border border-blue-100">{industry || 'No Industry'} Dashboard</span>
+              <span className="font-bold text-2xl text-gradient tracking-tight cursor-pointer" onClick={() => router.push('/')}>SWAIS</span>
+              <span className="ml-4 px-2.5 py-1 text-xs font-semibold bg-cyan-500/10 text-cyan-400 rounded-full border border-cyan-500/20">{industry || 'No Industry'} Dashboard</span>
             </div>
-            <div className="flex items-center gap-4 border-l pl-4 border-gray-200">
+            <div className="flex items-center gap-4 border-l pl-4 border-white/10">
               <div className="hidden sm:flex flex-col items-end">
-                <span className="text-sm font-semibold text-gray-700">{user.name}</span>
-                <span className="text-xs text-gray-500">{user.email}</span>
+                <span className="text-sm font-semibold text-slate-200">{user.name}</span>
+                <span className="text-xs text-slate-500">{user.email}</span>
               </div>
-              <button onClick={() => setModalOpen(true)} className="px-3 py-1.5 text-xs bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-md font-medium transition-colors">Change Industry</button>
-              <button onClick={() => signOut()} className="px-3 py-1.5 text-xs text-red-600 hover:bg-red-50 hover:text-red-700 rounded-md transition-colors">Logout</button>
+              <button onClick={() => setModalOpen(true)} className="px-3 py-1.5 text-xs bg-white/5 hover:bg-white/10 text-slate-300 rounded-md font-medium transition-colors border border-white/10">Change Industry</button>
+              <button onClick={() => signOut()} className="px-3 py-1.5 text-xs text-red-400 hover:bg-red-500/10 hover:text-red-300 rounded-md transition-colors">Logout</button>
             </div>
           </div>
         </div>
