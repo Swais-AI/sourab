@@ -2,6 +2,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import StandardHeader from '../../components/StandardHeader';
+import LoadingScreen from '../../components/LoadingScreen';
 
 const API = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
 
@@ -54,11 +55,7 @@ export default function PendingPage() {
   };
 
   if (checking) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-[#f0f4f8] text-[#0f2851] font-sans">
-        Checking account status...
-      </div>
-    );
+    return <LoadingScreen message="Checking your account status..." />;
   }
 
   return (

@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../../store/slices/userSlice';
 import StandardHeader from '../../components/StandardHeader';
+import LoadingScreen from '../../components/LoadingScreen';
 
 const INDUSTRIES = ['LOGISTICS', 'WAREHOUSING', 'ECOMMERCE', 'MANUFACTURING', 'BANKING', 'HEALTHCARE', 'EDUTECH'];
 const API = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
@@ -110,9 +111,7 @@ export default function RegisterPage() {
 
   if (checking) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#f0f4f8] text-[#0f2851] font-sans">
-        Checking session...
-      </div>
+      <LoadingScreen message="Setting up your registration..." />
     );
   }
 
@@ -163,47 +162,72 @@ export default function RegisterPage() {
             {step === 1 && (
               <div className="space-y-5">
                 <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-semibold text-[#0f2851] mb-1">First Name <span className="text-red-500">*</span></label>
-                    <input
-                      type="text" name="first_name" value={form.first_name} onChange={handleChange}
-                      placeholder="e.g. Bhuvan"
-                      className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-[#0f2851] focus:ring-1 focus:ring-[#0f2851]"
-                    />
+                  <div className="relative">
+                    <label className="block text-xs font-bold text-[#0f2851]/70 uppercase tracking-wider mb-2">First Name <span className="text-red-400">*</span></label>
+                    <div className="relative">
+                      <input
+                        type="text" name="first_name" value={form.first_name} onChange={handleChange}
+                        placeholder="Bhuvan"
+                        className="w-full border-2 border-gray-100 bg-gray-50 rounded-xl px-4 py-3 text-sm font-medium text-[#0f2851] placeholder-gray-300 focus:outline-none focus:border-[#0f2851] focus:bg-white transition-all"
+                      />
+                    </div>
                   </div>
-                  <div>
-                    <label className="block text-sm font-semibold text-[#0f2851] mb-1">Last Name <span className="text-red-500">*</span></label>
+                  <div className="relative">
+                    <label className="block text-xs font-bold text-[#0f2851]/70 uppercase tracking-wider mb-2">Last Name <span className="text-red-400">*</span></label>
                     <input
                       type="text" name="last_name" value={form.last_name} onChange={handleChange}
-                      placeholder="e.g. Saraf"
-                      className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-[#0f2851] focus:ring-1 focus:ring-[#0f2851]"
+                      placeholder="Saraf"
+                      className="w-full border-2 border-gray-100 bg-gray-50 rounded-xl px-4 py-3 text-sm font-medium text-[#0f2851] placeholder-gray-300 focus:outline-none focus:border-[#0f2851] focus:bg-white transition-all"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-[#0f2851] mb-1">Email (from Google)</label>
-                  <input
-                    type="text" disabled value={user?.email || ''}
-                    className="w-full border border-gray-200 bg-gray-50 text-gray-400 rounded-lg px-4 py-2.5 text-sm cursor-not-allowed"
-                  />
+                  <label className="block text-xs font-bold text-[#0f2851]/70 uppercase tracking-wider mb-2">Email</label>
+                  <div className="relative">
+                    <div className="absolute left-4 top-1/2 -translate-y-1/2">
+                      <svg className="w-4 h-4 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                      </svg>
+                    </div>
+                    <input
+                      type="text" disabled value={user?.email || ''}
+                      className="w-full border-2 border-gray-100 bg-gray-50/80 text-gray-400 rounded-xl pl-10 pr-4 py-3 text-sm cursor-not-allowed font-medium"
+                    />
+                    <span className="absolute right-4 top-1/2 -translate-y-1/2 text-xs bg-green-100 text-green-600 font-semibold px-2 py-0.5 rounded-full">Verified</span>
+                  </div>
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-semibold text-[#0f2851] mb-1">Phone Number <span className="text-red-500">*</span></label>
-                    <input
-                      type="tel" name="phone_number" value={form.phone_number} onChange={handleChange}
-                      placeholder="+91 98765 43210"
-                      className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-[#0f2851] focus:ring-1 focus:ring-[#0f2851]"
-                    />
+                    <label className="block text-xs font-bold text-[#0f2851]/70 uppercase tracking-wider mb-2">Phone Number <span className="text-red-400">*</span></label>
+                    <div className="relative">
+                      <div className="absolute left-4 top-1/2 -translate-y-1/2">
+                        <svg className="w-4 h-4 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 8.25h3" />
+                        </svg>
+                      </div>
+                      <input
+                        type="tel" name="phone_number" value={form.phone_number} onChange={handleChange}
+                        placeholder="+91 98765 43210"
+                        className="w-full border-2 border-gray-100 bg-gray-50 rounded-xl pl-10 pr-4 py-3 text-sm font-medium text-[#0f2851] placeholder-gray-300 focus:outline-none focus:border-[#0f2851] focus:bg-white transition-all"
+                      />
+                    </div>
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold text-[#0f2851] mb-1">Date of Birth <span className="text-red-500">*</span></label>
-                    <input
-                      type="date" name="dob" value={form.dob} onChange={handleChange}
-                      className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-[#0f2851] focus:ring-1 focus:ring-[#0f2851]"
-                    />
+                    <label className="block text-xs font-bold text-[#0f2851]/70 uppercase tracking-wider mb-2">Date of Birth <span className="text-red-400">*</span></label>
+                    <div className="relative">
+                      <div className="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none z-10">
+                        <svg className="w-4 h-4 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
+                        </svg>
+                      </div>
+                      <input
+                        type="date" name="dob" value={form.dob} onChange={handleChange}
+                        className="w-full border-2 border-gray-100 bg-gray-50 rounded-xl pl-10 pr-4 py-3 text-sm font-medium text-[#0f2851] focus:outline-none focus:border-[#0f2851] focus:bg-white transition-all appearance-none cursor-pointer"
+                        style={{ colorScheme: 'light' }}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>

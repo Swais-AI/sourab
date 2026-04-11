@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { logout } from '../store/slices/userSlice';
 
 const API = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
@@ -38,11 +39,12 @@ export default function StandardHeader() {
 
   return (
     <header className="w-full bg-white text-[#0f2851] py-4 px-8 flex justify-between items-center shadow-sm border-b border-gray-100 sticky top-0 z-50">
-      <div className="flex items-center font-bold text-lg tracking-wide">
-        <span className="font-extrabold mr-2">SWAIS</span>
+      <Link href="/" className="flex items-center font-bold text-lg tracking-wide hover:opacity-80 transition-opacity group">
+        <span className="font-extrabold mr-2 group-hover:text-[#cda653] transition-colors">SWAIS</span>
         <span className="text-gray-300 mx-2">|</span>
-        <span>Saraf Worldsphere AI Services</span>
-      </div>
+        <span className="text-sm font-medium text-gray-500">Saraf Worldsphere AI Services</span>
+        <span className="ml-3 text-xs bg-gray-100 text-gray-400 px-2 py-0.5 rounded-full font-normal hidden sm:inline">Home</span>
+      </Link>
 
       <div className="flex items-center gap-6">
         <span className="font-semibold tracking-wide text-[#0f2851]">{time}</span>

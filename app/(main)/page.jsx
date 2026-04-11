@@ -70,7 +70,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="py-24 px-4 sm:px-6 lg:px-8 relative">
+      <section className="py-24 px-4 sm:px-6 lg:px-8 relative bg-[#0a0a0f]">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">AI Capabilities</h2>
@@ -94,7 +94,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="py-24 px-4 sm:px-6 lg:px-8 relative border-t border-white/5">
+      <section className="py-24 px-4 sm:px-6 lg:px-8 relative bg-[#0a0a0f] border-t border-white/5">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">Industries We Serve</h2>
@@ -117,7 +117,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="py-24 px-4 sm:px-6 lg:px-8 relative border-t border-white/5">
+      <section className="py-24 px-4 sm:px-6 lg:px-8 relative bg-[#0a0a0f] border-t border-white/5">
         <div className="max-w-5xl mx-auto text-center">
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Ready to harness AI for your business?</h2>
           <p className="text-slate-400 text-lg max-w-2xl mx-auto mb-10">
