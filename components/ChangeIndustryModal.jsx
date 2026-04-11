@@ -45,9 +45,9 @@ export default function ChangeIndustryModal({ isOpen, onClose }) {
       
       if (res.ok) {
         const result = await res.json();
-        // Update user entirely in store
-        dispatch(setUser({ name: result.user.name, email: result.user.email, ...result.user }));
-        dispatch(setIndustry(result.user.user_type));
+        // API returns user directly at root level (not nested under result.user)
+        dispatch(setUser(result));
+        dispatch(setIndustry(result.user_type));
         onClose();
       } else {
         console.error('Failed to complete registration');

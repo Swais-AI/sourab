@@ -1,9 +1,26 @@
 'use client';
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { useRouter } from 'next/navigation';
 import StandardHeader from '../../components/StandardHeader';
+
+const API = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
 
 export default function WarehouseMenuPage() {
   const { user } = useSelector(state => state.user);
+  const router = useRouter();
+
+  // Auth guard — Redux resets on page refresh, re-verify with backend
+  useEffect(() => {
+    fetch(`${API}/user/me`, { credentials: 'include' })
+      .then(res => { if (!res.ok) throw new Error(); return res.json(); })
+      .then(data => {
+        if (!data.registration_complete) { router.replace('/register'); return; }
+        if (!data.is_active) { router.replace('/pending'); return; }
+        if ((data.user_type || '').toUpperCase() !== 'WAREHOUSING') { router.replace('/dashboard'); }
+      })
+      .catch(() => router.replace('/login'));
+  }, [router]);
 
   const menuButtons = [
     { name: 'INBOUND RECEIVING', color: 'bg-[#3b82f6] hover:bg-[#2563eb]' }, // Blue
