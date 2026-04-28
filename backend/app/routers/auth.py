@@ -3,9 +3,6 @@ from fastapi import APIRouter, Depends, Request, Response
 from fastapi.responses import RedirectResponse
 from sqlalchemy.orm import Session
 import httpx
-import logging
-
-logger = logging.getLogger(__name__)
 
 from app.config import settings
 from app.database import get_db
@@ -50,11 +47,6 @@ async def google_callback(code: str, db: Session = Depends(get_db)):
                 "redirect_uri":  settings.GOOGLE_CALLBACK_URL,
             })
             tokens = token_res.json()
-            logger.error(f"Google token response: {tokens}")
-
-            if 'access_token' not in tokens:
-                logger.error(f"Token exchange failed: {tokens}")
-                return RedirectResponse(f"{frontend}?error=auth_failed")
 
             # Get user profile from Google
             info_res = await client.get(
@@ -62,10 +54,8 @@ async def google_callback(code: str, db: Session = Depends(get_db)):
                 headers={"Authorization": f"Bearer {tokens['access_token']}"},
             )
             info = info_res.json()
-            logger.error(f"Google user info: {info}")
 
-    except Exception as e:
-        logger.error(f"Auth exception: {e}")
+    except Exception:
         return RedirectResponse(f"{frontend}?error=auth_failed")
 
     email = info.get("email")
@@ -100,7 +90,7 @@ async def google_callback(code: str, db: Session = Depends(get_db)):
         redirect_to = f"{frontend}/dashboard"
 
     response = RedirectResponse(redirect_to)
-    cookie_kwargs = dict(
+    response.set_cookie(
         key="token",
         value=token,
         httponly=True,
@@ -108,11 +98,6 @@ async def google_callback(code: str, db: Session = Depends(get_db)):
         samesite="lax",
         max_age=COOKIE_MAX_AGE,
     )
-    # In production, scope the cookie to .swais.in so both swais.in and api.swais.in can read it
-    if settings.COOKIE_DOMAIN:
-        cookie_kwargs["domain"] = settings.COOKIE_DOMAIN
-    logger.error(f"Setting cookie with domain: {settings.COOKIE_DOMAIN!r}, redirect to: {redirect_to}")
-    response.set_cookie(**cookie_kwargs)
     return response
 
 
