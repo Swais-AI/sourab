@@ -15,7 +15,7 @@ export default function ContactPage() {
              </div>
              <div>
                <h3 className="text-2xl font-semibold text-white mb-3">Head Office</h3>
-               <p className="text-slate-400 leading-relaxed text-lg">10-A Prithviraj Road<br/>New Delhi – 110011<br/>India</p>
+               <p className="text-slate-400 leading-relaxed text-lg">Plot No. 199, Srinivasanagar<br/>Opposite Sun School<br/>Vizianagaram – 535002<br/>Andhra Pradesh, India</p>
              </div>
           </div>
           
@@ -25,7 +25,7 @@ export default function ContactPage() {
              </div>
              <div>
                <h3 className="text-2xl font-semibold text-white mb-3">Branch Office</h3>
-               <p className="text-slate-400 leading-relaxed text-lg">Plot No. 199, Srinivasanagar<br/>Opposite Sun School<br/>Vizianagaram – 535002<br/>Andhra Pradesh, India</p>
+               <p className="text-slate-400 leading-relaxed text-lg">10-A Prithviraj Road<br/>New Delhi – 110011<br/>India</p>
              </div>
           </div>
         </div>
