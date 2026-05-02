@@ -37,7 +37,7 @@ export default function ContactPage() {
              </div>
              <div className="text-center md:text-left">
                <h3 className="text-xl font-semibold text-white mb-1">Email</h3>
-               <a href="mailto:contact@swais.com" className="text-cyan-400 hover:text-cyan-300 transition-colors text-lg font-medium">contact@swais.com</a>
+               <a href="mailto:murty.varanasi@swais.in" className="text-cyan-400 hover:text-cyan-300 transition-colors text-lg font-medium">murty.varanasi@swais.in</a>
              </div>
           </div>
           
