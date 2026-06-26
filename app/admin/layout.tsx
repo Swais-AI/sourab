@@ -7,7 +7,8 @@ import {
   BookOpen,
   Settings, 
   Menu,
-  X
+  X,
+  LogOut
 } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -92,8 +93,19 @@ export default function AdminLayout({
                 animate={{ opacity: 1 }}
                 className="p-4 bg-white/5 rounded-xl border border-white/10"
               >
+                <button
+                  onClick={() => {
+                    localStorage.removeItem('auth_token');
+                    localStorage.removeItem('auth_user');
+                    window.location.href = '/login';
+                  }}
+                  className="w-full mb-3 flex items-center justify-center gap-2 px-4 py-2 bg-red-500/20 hover:bg-red-500/40 text-red-400 rounded-xl transition-all"
+                >
+                  <LogOut size={16} />
+                  {sidebarOpen && <span className="text-sm font-medium">Logout</span>}
+                </button>
                 <p className="text-white/30 text-xs text-center">
-                  © 2026 SGS School<br />
+                  © 2026 SSS School<br />
                   Management System
                 </p>
               </motion.div>
