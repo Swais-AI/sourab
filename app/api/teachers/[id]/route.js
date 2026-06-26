@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import postgres from 'postgres';
 
-const sql = postgres(process.env.DATABASE_URL, { ssl: false });
+const sql = postgres(process.env.DATABASE_URL, { ssl: "require" });
 
 const validateEmail = (email) => {
   if (!email || email.trim() === '') return null;

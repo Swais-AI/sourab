@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import postgres from 'postgres';
 
 const pool = postgres(process.env.DATABASE_URL, { 
-  ssl: false
+  ssl: "require"
 });
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-this';

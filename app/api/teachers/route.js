@@ -4,7 +4,7 @@ import postgres from 'postgres';
 export const dynamic = 'force-dynamic';
 
 const sql = postgres(process.env.DATABASE_URL, { 
-  ssl: false
+  ssl: "require"
 });
 
 const validateEmail = (email) => {

@@ -3,7 +3,7 @@ import postgres from 'postgres';
 import jwt from 'jsonwebtoken';
 
 const pool = postgres(process.env.DATABASE_URL, { 
-  ssl: false
+  ssl: "require"
 });
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-this';
@@ -12,7 +12,6 @@ export async function POST(request) {
   try {
     const body = await request.json();
     const { email, password } = body;
-
     console.log('Login attempt for email:', email);
 
     if (!email || !password) {
@@ -22,13 +21,11 @@ export async function POST(request) {
       );
     }
 
-    // Query the database for the user
-    // Naya — sahi column names
-const users = await pool`
-  SELECT user_id, login_id as email, full_name as username, role, is_active, password_hash
-  FROM users_master 
-  WHERE login_id = ${email}
-`;
+    const users = await pool`
+      SELECT user_id, email, username, role, is_active, password_hash
+      FROM sss_users_master 
+      WHERE email = ${email}
+    `;
 
     console.log('User found:', users.length > 0 ? 'Yes' : 'No');
 
@@ -41,16 +38,13 @@ const users = await pool`
 
     const user = users[0];
 
-    // For now, accept any password for testing
-    // In production, use bcrypt.compare()
-    if (user.password_hash !== password && user.password_hash !== 'google_oauth_user') {
+    if (user.password_hash !== password) {
       return NextResponse.json(
         { success: false, message: 'Invalid email or password' },
         { status: 401 }
       );
     }
 
-    // Check if user is active
     if (!user.is_active) {
       return NextResponse.json(
         { success: false, message: 'Account is inactive. Please contact admin.' },
@@ -58,19 +52,13 @@ const users = await pool`
       );
     }
 
-    // Generate JWT Token
     const token = jwt.sign(
-      { 
-        userId: user.user_id, 
-        email: user.email, 
-        role: user.role 
-      },
+      { userId: user.user_id, email: user.email, role: user.role },
       JWT_SECRET,
       { expiresIn: '5h' }
     );
 
     const isAdmin = ['admin', 'super_admin'].includes(user.role);
-
     console.log('Login successful for:', email);
 
     return NextResponse.json({
@@ -90,11 +78,7 @@ const users = await pool`
   } catch (error) {
     console.error('Login error:', error);
     return NextResponse.json(
-      { 
-        success: false, 
-        message: 'Login failed', 
-        error: error.message 
-      },
+      { success: false, message: 'Login failed', error: error.message },
       { status: 500 }
     );
   }
