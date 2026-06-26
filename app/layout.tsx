@@ -6,7 +6,7 @@ import { AuthProvider } from './context/AuthContext';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'SGS School Admin Dashboard',
+  title: 'SSS School Admin Dashboard',
   description: 'School Management System',
 };
 

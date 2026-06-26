@@ -63,10 +63,10 @@ export default function LoginPage() {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
       <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-8 w-full max-w-md border border-white/20">
         <div className="text-center mb-8">
-          <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
-            <span className="text-white text-2xl font-bold">SGS</span>
-          </div>
-          <h1 className="text-3xl font-bold text-white">SGS School Admin</h1>
+          <div className="w-24 h-24 mx-auto mb-4">
+  <img src="/sss-logo.png" alt="SSS Logo" className="w-full h-full object-contain rounded-full" />
+</div>
+          <h1 className="text-3xl font-bold text-white">SSS School Admin</h1>
           <p className="text-white/60 mt-2">Sign in to access the dashboard</p>
         </div>
 
@@ -109,8 +109,8 @@ export default function LoginPage() {
         </form>
 
         <div className="mt-4 text-center">
-          <p className="text-white/40 text-xs">Demo: admin@sgs.com / admin123 (Admin)</p>
-          <p className="text-white/40 text-xs">Demo: teacher@sgs.com / teacher123 (Teacher)</p>
+          <p className="text-white/40 text-xs">Demo: admin@sss.com / admin123 (Admin)</p>
+          <p className="text-white/40 text-xs">Demo: teacher@sss.com / teacher123 (Teacher)</p>
         </div>
 
         <p className="text-white/30 text-xs text-center mt-6">

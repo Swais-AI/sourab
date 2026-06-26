@@ -4,7 +4,7 @@ import postgres from 'postgres';
 export const dynamic = 'force-dynamic';
 
 const sql = postgres(process.env.DATABASE_URL, { 
-  ssl: 'require'
+  ssl: false
 });
 
 const validateEmail = (email) => {
@@ -33,8 +33,8 @@ export async function GET(request) {
         CASE WHEN is_class_teacher = true THEN 'Y' ELSE '' END as isClassTeacher,
         subjects as subjects,
         CASE WHEN is_active = true THEN 'active' ELSE 'inactive' END as status
-      FROM sgs_teacher_master
-      ORDER BY teacher_id DESC
+      FROM sss_teacher_master
+      ORDER BY teacher_id ASC
       LIMIT 100
     `;
     
@@ -59,7 +59,7 @@ export async function POST(request) {
     const subjectsArray = subjects ? subjects.split(',').map(s => s.trim()) : [];
     
     const result = await sql`
-      INSERT INTO sgs_teacher_master (
+      INSERT INTO sss_teacher_master (
         full_name,
         subject_name,
         qualification,

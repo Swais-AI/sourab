@@ -3,7 +3,7 @@ import postgres from 'postgres';
 import jwt from 'jsonwebtoken';
 
 const pool = postgres(process.env.DATABASE_URL, { 
-  ssl: 'require'
+  ssl: false
 });
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-this';
@@ -23,11 +23,12 @@ export async function POST(request) {
     }
 
     // Query the database for the user
-    const users = await pool`
-      SELECT user_id, email, username, role, is_active, password_hash
-      FROM users_master 
-      WHERE email = ${email}
-    `;
+    // Naya — sahi column names
+const users = await pool`
+  SELECT user_id, login_id as email, full_name as username, role, is_active, password_hash
+  FROM users_master 
+  WHERE login_id = ${email}
+`;
 
     console.log('User found:', users.length > 0 ? 'Yes' : 'No');
 

@@ -6,11 +6,11 @@ import {
   Users, 
   BookOpen,
   Settings, 
-  GraduationCap,
   Menu,
   X
 } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import SessionManager from '../../components/SessionManager';
 
@@ -40,29 +40,28 @@ export default function AdminLayout({
           {/* Sidebar content - same as before */}
           <div className="p-6">
             <div className="flex items-center justify-between mb-10">
-              {sidebarOpen && (
-                <motion.div 
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="flex items-center gap-3"
-                >
-                  <div className="p-2 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-xl">
-                    <GraduationCap className="w-6 h-6 text-white" />
-                  </div>
-                  <div>
-                    <h1 className="text-white font-bold text-xl">SGS School</h1>
-                    <p className="text-white/40 text-xs">Admin Portal</p>
-                  </div>
-                </motion.div>
-              )}
-              <button 
-                onClick={() => setSidebarOpen(!sidebarOpen)}
-                className="text-white/70 hover:text-white transition-colors"
-              >
-                {sidebarOpen ? <X size={24} /> : <Menu size={24} />}
-              </button>
-            </div>
-
+            <div className="flex items-center gap-3 min-w-0">
+             <div className="flex-shrink-0">
+            <img
+  src="/sss-logo.png"
+  alt="SSS Logo"
+  style={{width: '40px', height: '40px', borderRadius: '10px'}}
+/>
+    </div>
+    {sidebarOpen && (
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <h1 className="text-white font-bold text-xl">SSS School</h1>
+        <p className="text-white/40 text-xs">Admin Portal</p>
+      </motion.div>
+    )}
+  </div>
+  <button
+    onClick={() => setSidebarOpen(!sidebarOpen)}
+    className="text-white/70 hover:text-white transition-colors flex-shrink-0"
+  >
+    {sidebarOpen ? <X size={24} /> : <Menu size={24} />}
+  </button>
+</div>
             <nav className="space-y-2">
               {menuItems.map((item) => {
                 const isActive = pathname === item.path;

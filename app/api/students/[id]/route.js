@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import postgres from 'postgres';
 
-const sql = postgres(process.env.DATABASE_URL, { ssl: 'require' });
+const sql = postgres(process.env.DATABASE_URL, { ssl: false });
 
 const validateEmail = (email) => {
   if (!email || email.trim() === '') return null;
@@ -18,20 +18,20 @@ export async function GET(request, { params }) {
     const students = await sql`
       SELECT 
         student_id as id,
-        admission_no as admissionNo,
+        admission_no as "admissionNo",
         full_name as name,
         class as class,
         section as section,
-        roll_no as rollNo,
-        parent1_name as parentName,
-        parent1_phone as parentPhone,
-        parent1_email as parentEmail,
-        student_phone as contact,
-        student_email as email,
-        guardian_name as guardianName,
-        guardian_phone as guardianPhone,
+        roll_no as "rollNo",
+        parent1_name as "parentName",
+        parent1_phone as "parentPhone",
+        parent1_email as "parentEmail",
+        student_phone as "contact",
+        student_email as "email",
+        guardian_name as "guardianName",
+        guardian_phone as "guardianPhone",
         CASE WHEN is_active = true THEN 'active' ELSE 'inactive' END as status
-      FROM sgs_student_master
+      FROM sss_student_master
       WHERE student_id = ${id}
     `;
     
@@ -60,7 +60,7 @@ export async function PUT(request, { params }) {
     const validParentEmail = validateEmail(parentEmail);
     
     const result = await sql`
-      UPDATE sgs_student_master 
+      UPDATE sss_student_master 
       SET 
         admission_no = ${admissionNo || null},
         full_name = ${name},
@@ -94,7 +94,7 @@ export async function PATCH(request, { params }) {
     const isActive = status === 'active';
     
     const result = await sql`
-      UPDATE sgs_student_master 
+      UPDATE sss_student_master 
       SET is_active = ${isActive}
       WHERE student_id = ${id}
       RETURNING student_id as id
@@ -111,7 +111,7 @@ export async function DELETE(request, { params }) {
     const { id } = await params;
     
     await sql`
-      UPDATE sgs_student_master 
+      UPDATE sss_student_master 
       SET is_active = false,
           record_status = 'D'
       WHERE student_id = ${id}

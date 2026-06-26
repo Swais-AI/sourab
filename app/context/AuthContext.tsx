@@ -20,16 +20,16 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 // Mock staff data for 10 different staff members
 const mockStaff = [
-  { id: 'STAFF1', name: 'Rajesh Kumar', email: 'rajesh@sgs.com', password: '123', role: 'staff' as const },
-  { id: 'STAFF2', name: 'Priya Sharma', email: 'priya@sgs.com', password: '123', role: 'staff' as const },
-  { id: 'STAFF3', name: 'Amit Verma', email: 'amit@sgs.com', password: '123', role: 'staff' as const },
-  { id: 'STAFF4', name: 'Sunita Reddy', email: 'sunita@sgs.com', password: '123', role: 'staff' as const },
-  { id: 'STAFF5', name: 'Vikram Singh', email: 'vikram@sgs.com', password: '123', role: 'staff' as const },
-  { id: 'STAFF6', name: 'Neha Gupta', email: 'neha@sgs.com', password: '123', role: 'staff' as const },
-  { id: 'STAFF7', name: 'Suresh Nair', email: 'suresh@sgs.com', password: '123', role: 'staff' as const },
-  { id: 'STAFF8', name: 'Kavita Joshi', email: 'kavita@sgs.com', password: '123', role: 'staff' as const },
-  { id: 'STAFF9', name: 'Deepak Patil', email: 'deepak@sgs.com', password: '123', role: 'staff' as const },
-  { id: 'STAFF10', name: 'Anjali Menon', email: 'anjali@sgs.com', password: '123', role: 'staff' as const },
+  { id: 'STAFF1', name: 'Rajesh Kumar', email: 'rajesh@sss.com', password: '123', role: 'staff' as const },
+  { id: 'STAFF2', name: 'Priya Sharma', email: 'priya@sss.com', password: '123', role: 'staff' as const },
+  { id: 'STAFF3', name: 'Amit Verma', email: 'amit@sss.com', password: '123', role: 'staff' as const },
+  { id: 'STAFF4', name: 'Sunita Reddy', email: 'sunita@sss.com', password: '123', role: 'staff' as const },
+  { id: 'STAFF5', name: 'Vikram Singh', email: 'vikram@sss.com', password: '123', role: 'staff' as const },
+  { id: 'STAFF6', name: 'Neha Gupta', email: 'neha@sss.com', password: '123', role: 'staff' as const },
+  { id: 'STAFF7', name: 'Suresh Nair', email: 'suresh@sss.com', password: '123', role: 'staff' as const },
+  { id: 'STAFF8', name: 'Kavita Joshi', email: 'kavita@sss.com', password: '123', role: 'staff' as const },
+  { id: 'STAFF9', name: 'Deepak Patil', email: 'deepak@sss.com', password: '123', role: 'staff' as const },
+  { id: 'STAFF10', name: 'Anjali Menon', email: 'anjali@sss.com', password: '123', role: 'staff' as const },
 ];
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
@@ -37,7 +37,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     // Check localStorage for saved user on page load
-    const savedUser = localStorage.getItem('sgs_user');
+    const savedUser = localStorage.getItem('sss_user');
     if (savedUser) {
       setUser(JSON.parse(savedUser));
     }
@@ -50,7 +50,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     if (foundUser) {
       const { password, ...userWithoutPassword } = foundUser;
       setUser(userWithoutPassword);
-      localStorage.setItem('sgs_user', JSON.stringify(userWithoutPassword));
+      localStorage.setItem('sss_user', JSON.stringify(userWithoutPassword));
       return true;
     }
     return false;
@@ -58,7 +58,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem('sgs_user');
+    localStorage.removeItem('sss_user');
   };
 
   return (

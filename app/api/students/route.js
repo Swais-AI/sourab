@@ -3,10 +3,7 @@ import postgres from 'postgres';
 
 export const dynamic = 'force-dynamic';
 
-const sql = postgres(process.env.DATABASE_URL, { 
-  ssl: 'require'
-});
-
+const sql = postgres(process.env.DATABASE_URL, { ssl: false });
 // Email validation - must end with @gmail.com
 const validateEmail = (email) => {
   if (!email || email.trim() === '') return null;
@@ -22,22 +19,22 @@ export async function GET(request) {
     const students = await sql`
       SELECT 
         student_id as id,
-        admission_no as admissionNo,
+        admission_no as "admissionNo",
         full_name as name,
         class as class,
         section as section,
-        roll_no as rollNo,
-        parent1_name as parentName,
-        parent1_phone as parentPhone,
-        parent1_email as parentEmail,
-        student_phone as contact,
-        student_email as email,
-        guardian_name as guardianName,
-        guardian_phone as guardianPhone,
+        roll_no as "rollNo",
+        parent1_name as "parentName",
+        parent1_phone as "parentPhone",
+        parent1_email as "parentEmail",
+        student_phone as "contact",
+        student_email as "email",
+        guardian_name as "guardianName",
+        guardian_phone as "guardianPhone",
         CASE WHEN is_active = true THEN 'active' ELSE 'inactive' END as status
-      FROM sgs_student_master
+      FROM sss_student_master
       WHERE record_status = 'Active' OR record_status IS NULL
-      ORDER BY student_id DESC
+      ORDER BY student_id ASC
       LIMIT 100
     `;
     
@@ -63,7 +60,7 @@ export async function POST(request) {
     const validParentEmail = validateEmail(parentEmail);
     
     const result = await sql`
-      INSERT INTO sgs_student_master (
+      INSERT INTO sss_student_master (
         admission_no,
         full_name,
         class,

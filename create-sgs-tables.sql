@@ -99,9 +99,9 @@ CREATE TABLE IF NOT EXISTS notice_board (
     version_no INTEGER DEFAULT 1
 );
 
--- Insert default school record for SGS
+-- Insert default school record for SSS
 INSERT INTO school_master (school_name, city, state, contact_person, email_id, record_status)
-SELECT 'SGS School', 'Hyderabad', 'Telangana', 'Headmaster', 'sgs@sgschool.com', 'Active'
+SELECT 'SSS School', 'Hyderabad', 'Telangana', 'Headmaster', 'sss@ssschool.com', 'Active'
 WHERE NOT EXISTS (SELECT 1 FROM school_master LIMIT 1);
 
 -- Insert sample classes
@@ -124,11 +124,11 @@ WHERE NOT EXISTS (SELECT 1 FROM student_master WHERE admission_no='S102');
 
 -- Insert sample teachers
 INSERT INTO teacher_master (full_name, subject_name, role, email_id, mobile_no, record_status)
-SELECT 'Mr. Ramesh', 'Mathematics', 'teacher', 'ramesh@sgschool.com', '9000011111', 'Active'
+SELECT 'Mr. Ramesh', 'Mathematics', 'teacher', 'ramesh@ssschool.com', '9000011111', 'Active'
 WHERE NOT EXISTS (SELECT 1 FROM teacher_master WHERE full_name='Mr. Ramesh');
 
 INSERT INTO teacher_master (full_name, subject_name, role, email_id, mobile_no, record_status)
-SELECT 'Mrs. Lakshmi', 'English', 'teacher', 'lakshmi@sgschool.com', '9000022222', 'Active'
+SELECT 'Mrs. Lakshmi', 'English', 'teacher', 'lakshmi@ssschool.com', '9000022222', 'Active'
 WHERE NOT EXISTS (SELECT 1 FROM teacher_master WHERE full_name='Mrs. Lakshmi');
 
 -- Insert sample notice
