@@ -9,7 +9,7 @@ const getRedirectPath = (role: string): string => {
   const roleMap: { [key: string]: string } = {
     'admin': '/admin/students',
     'super_admin': '/admin/students',
-    'teacher': '/teacher/dashboard',
+    'teacher': '/admin/students',
     'student': '/student/dashboard',
     'parent': '/parent/dashboard',
     'staff': '/staff/dashboard'
