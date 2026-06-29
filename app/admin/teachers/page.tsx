@@ -163,7 +163,7 @@ export default function TeachersPage() {
         name: teacher.name,
         subject: teacher.subject || '',
         qualification: teacher.qualification || '',
-        classId: teacher.classid || '',
+        classId: teacher.classId || '',
         section1: teacher.section1 || '',
         section2: teacher.section2 || '',
         role: teacher.role || 'TEACHER',
@@ -259,7 +259,7 @@ export default function TeachersPage() {
                   <td className="px-4 py-4 text-white">{teacher.name}</td>
                   <td className="px-4 py-4 text-white/80">{teacher.subject || '—'}</td>
                   <td className="px-4 py-4 text-white/80">{teacher.qualification || '—'}</td>
-                  <td className="px-4 py-4 text-white/80">{teacher.classid || '—'}</td>
+                  <td className="px-4 py-4 text-white/80">{teacher.classId || '—'}</td>
                   <td className="px-4 py-4 text-white/80">{teacher.section1 || teacher.section2 || '—'}</td>
                   <td className="px-4 py-4 text-white/80">{teacher.isClassTeacher === 'Y' ? 'Yes' : '—'}</td>
                   <td className="px-4 py-4 text-white/80">{teacher.contact || '—'}</td>
