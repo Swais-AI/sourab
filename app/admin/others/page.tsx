@@ -133,7 +133,7 @@ export default function OthersPage() {
             <p className="text-white/70 mb-3">{notice.description}</p>
             <div className="flex flex-wrap gap-4 text-sm">
               <span className="text-white/40">Target: {notice.targetAudience || 'All'}</span>
-              <span className="text-white/40">Date: {notice.noticedate ? new Date(notice.noticedate).toLocaleDateString() : '-'}</span>
+              <span className="text-white/40">Date: {notice.noticeDate ? new Date(notice.noticeDate).toLocaleDateString() : '-'}</span>
             </div>
           </motion.div>
         ))}
