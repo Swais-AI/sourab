@@ -14,6 +14,7 @@ interface Teacher {
   subject: string;
   qualification: string;
   classId: string;
+  classid?: string;
   section1: string;
   section2: string;
   role: string;
@@ -163,7 +164,7 @@ export default function TeachersPage() {
         name: teacher.name,
         subject: teacher.subject || '',
         qualification: teacher.qualification || '',
-        classId: teacher.classid || '',
+        classId: teacher.classId || '',
         section1: teacher.section1 || '',
         section2: teacher.section2 || '',
         role: teacher.role || 'TEACHER',
