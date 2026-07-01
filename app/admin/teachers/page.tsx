@@ -66,7 +66,7 @@ export default function TeachersPage() {
 
   const validateEmail = (email: string): boolean => {
     if (!email) return true;
-    return email.toLowerCase().endsWith('@gmail.com');
+    return email.includes("@");
   };
 
   const handleAdd = async () => {
@@ -163,7 +163,7 @@ export default function TeachersPage() {
         name: teacher.name,
         subject: teacher.subject || '',
         qualification: teacher.qualification || '',
-        classId: teacher.classId || '',
+        classId: teacher.classid || '',
         section1: teacher.section1 || '',
         section2: teacher.section2 || '',
         role: teacher.role || 'TEACHER',
@@ -178,7 +178,7 @@ export default function TeachersPage() {
 
   const filteredTeachers = teachers.filter(t => 
     (t.name?.toLowerCase() || '').includes(searchTerm.toLowerCase()) ||
-    t.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    t.id.toString().toLowerCase().includes(searchTerm.toLowerCase()) ||
     (t.subject?.toLowerCase() || '').includes(searchTerm.toLowerCase())
   );
 
@@ -248,6 +248,7 @@ export default function TeachersPage() {
                 <th className="px-4 py-4 text-left text-white">Section</th>
                 <th className="px-4 py-4 text-left text-white">Class Teacher</th>
                 <th className="px-4 py-4 text-left text-white">Contact</th>
+                <th className="px-4 py-4 text-left text-white">Email</th>
                 <th className="px-4 py-4 text-left text-white">Status</th>
                 <th className="px-4 py-4 text-left text-white">Actions</th>
               </tr>
@@ -259,10 +260,11 @@ export default function TeachersPage() {
                   <td className="px-4 py-4 text-white">{teacher.name}</td>
                   <td className="px-4 py-4 text-white/80">{teacher.subject || '—'}</td>
                   <td className="px-4 py-4 text-white/80">{teacher.qualification || '—'}</td>
-                  <td className="px-4 py-4 text-white/80">{teacher.classId || '—'}</td>
+                  <td className="px-4 py-4 text-white/80">{ teacher.classid || '—'}</td>
                   <td className="px-4 py-4 text-white/80">{teacher.section1 || teacher.section2 || '—'}</td>
                   <td className="px-4 py-4 text-white/80">{teacher.isClassTeacher === 'Y' ? 'Yes' : '—'}</td>
                   <td className="px-4 py-4 text-white/80">{teacher.contact || '—'}</td>
+                    <td className="px-4 py-4 text-white/80">{teacher.email || '—'}</td>
                   <td className="px-4 py-4"><button onClick={() => handleToggleStatus(teacher.id)} className={`px-3 py-1 rounded-full text-sm font-semibold ${teacher.status === 'active' ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'}`}>{teacher.status}</button></td>
                   <td className="px-4 py-4"><div className="flex gap-2"><button onClick={() => openModal('modify', teacher)} className="p-2 text-blue-400 hover:bg-blue-500/20 rounded-lg"><Pencil size={16} /></button><button onClick={() => handleDelete(teacher.id)} className="p-2 text-red-400 hover:bg-red-500/20 rounded-lg"><Trash2 size={16} /></button></div></td>
                 </tr>
@@ -300,7 +302,7 @@ export default function TeachersPage() {
                 </select>
                 <input type="text" placeholder="Subjects (comma separated for multiple)" value={formData.subjects} onChange={(e) => setFormData({...formData, subjects: e.target.value})} className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white" />
                 <input type="tel" placeholder="Contact Number" value={formData.contact} onChange={(e) => setFormData({...formData, contact: e.target.value})} className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white" />
-                <input type="email" placeholder="Email (must end with @gmail.com)" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white" />
+                <input type="email" placeholder="Email" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white" />
               </div>
 
               <div className="flex gap-3 mt-6">

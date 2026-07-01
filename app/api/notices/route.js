@@ -1,12 +1,10 @@
 import { NextResponse } from 'next/server';
 import postgres from 'postgres';
-
 export const dynamic = 'force-dynamic';
-
 const sql = postgres(process.env.DATABASE_URL, { 
-  ssl: "require"
+  ssl: "require",
+  transform: postgres.camel
 });
-
 export async function GET(request) {
   try {
     const notices = await sql`
@@ -14,9 +12,9 @@ export async function GET(request) {
         notice_id as id,
         notice_title as title,
         notice_text as description,
-        applicable_class as targetAudience,
-        notice_date as noticeDate,
-        created_datetime as createdAt,
+        applicable_class as target_audience,
+        notice_date as notice_date,
+        created_datetime as created_at,
         CASE WHEN record_status = 'Active' THEN 'active' ELSE 'inactive' END as status
       FROM sss_notice_board
       WHERE record_status = 'Active' OR record_status IS NULL
@@ -24,13 +22,22 @@ export async function GET(request) {
       LIMIT 100
     `;
     
-    return NextResponse.json({ success: true, notices: notices });
+    const formatted = notices.map(n => ({
+      id: n.id,
+      title: n.title,
+      description: n.description,
+      targetAudience: n.targetAudience,
+      noticeDate: n.noticeDate,
+      createdAt: n.createdAt,
+      status: n.status
+    }));
+    
+    return NextResponse.json({ success: true, notices: formatted });
   } catch (error) {
     console.error('Database Error:', error);
     return NextResponse.json({ success: false, error: error.message }, { status: 500 });
   }
 }
-
 export async function POST(request) {
   try {
     const body = await request.json();

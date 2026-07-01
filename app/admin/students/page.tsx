@@ -191,7 +191,7 @@ export default function StudentsPage() {
 
   const filteredStudents = students.filter(s => 
     (s.name?.toLowerCase() || '').includes(searchTerm.toLowerCase()) ||
-    s.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    s.id.toString().toLowerCase().includes(searchTerm.toLowerCase()) ||
     (s.class?.toLowerCase() || '').includes(searchTerm.toLowerCase()) ||
     (s.section?.toLowerCase() || '').includes(searchTerm.toLowerCase()) ||
     (s.parentName?.toLowerCase() || '').includes(searchTerm.toLowerCase())

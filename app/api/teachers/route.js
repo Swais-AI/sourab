@@ -3,17 +3,13 @@ import postgres from 'postgres';
 
 export const dynamic = 'force-dynamic';
 
-const sql = postgres(process.env.DATABASE_URL, { 
+const sql = postgres(process.env.DATABASE_URL, { transform: postgres.camel, 
   ssl: "require"
 });
 
 const validateEmail = (email) => {
   if (!email || email.trim() === '') return null;
-  const trimmedEmail = email.trim().toLowerCase();
-  if (trimmedEmail.endsWith('@gmail.com')) {
-    return trimmedEmail;
-  }
-  return null;
+  return email.trim().toLowerCase();
 };
 
 export async function GET(request) {
